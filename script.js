@@ -1,18 +1,68 @@
+// Start
 let apiData = null;
 
-function loadTracks() {
+function getAPIData() {
     fetch("https://f5api.sparkedservers.us/jamtracks")
     .then(res => res.json())
     .then(data => {
         apiData = data.data;
-        let cards = document.getElementById("cards");
-
-        for (const track of Object.keys(data.data)) {
-            cards.innerHTML += `<div class="card" onclick="openWindow('${track}')"><img src="${data.data[track].cover_image}" alt="${data.data[track].track_title} cover img"><h3>${data.data[track].track_title}</h3><h4>${data.data[track].artist_name}</h4></div>`;
-        }
+        loadTracks(apiData);
     })
 }
 
+getAPIData();
+
+// Track cards handle
+function loadTracks(data) {
+    let cards = document.getElementById("cards");
+    console.log(data)
+    for (const track of Object.keys(data)) {
+        cards.innerHTML += 
+        `
+            <div class="card ${(data[track].released) ? `` : `unreleased`}" onclick="openWindow('${track}')">
+                <img src="${data[track].cover_image}" alt="${data[track].track_title} cover img">
+                <div>
+                    ${(data[track].released) ? `<h3>${data[track].track_title}</h3>` : `<h3>${data[track].track_title}</h3>`}
+                    <h4>${data[track].artist_name}</h4>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function clearTracks() {
+    let cards = document.getElementById("cards");
+    while (cards.firstChild) {
+        cards.removeChild(cards.lastChild);
+    }
+}
+
+// Filter handle
+function checkFilters() {
+    let filterR = document.getElementById("filR");
+    let filterU = document.getElementById("filU");
+
+    if (filterR.checked && filterU.checked) {
+        clearTracks();
+        loadTracks(apiData);
+    } else {
+        clearTracks();
+        let selected = {};
+
+        for (const track of Object.keys(apiData)) {
+            if (filterR.checked && apiData[track].released) {
+                selected[track] = apiData[track];
+            } 
+            else if (filterU.checked && !apiData[track].released) {
+                selected[track] = apiData[track];
+            }
+        }
+
+        loadTracks(selected)
+    }
+}
+
+// Window handle
 function openWindow(track) {
     let trackData = apiData[track];
     console.log(trackData.difficulties.lead)
@@ -67,5 +117,3 @@ function openWindow(track) {
 function closeWindow() {
     document.getElementById("mainDiv").style.display = "none";
 }
-
-loadTracks()
