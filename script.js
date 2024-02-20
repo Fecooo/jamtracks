@@ -2,7 +2,7 @@
 let apiData = null;
 
 function getAPIData() {
-    fetch("https://f5api.sparkedservers.us/jamtracks")
+    fetch("https://api.f5api.xyz/jamtracks")
     .then(res => res.json())
     .then(data => {
         apiData = data.data;
@@ -69,7 +69,7 @@ function openWindow(track) {
 
     document.getElementById("left-col").innerHTML = 
     `
-        <img src="https://f5api.sparkedservers.us/media/jamtrack?id=${track}" alt="${track}">
+        <img src="https://api.f5api.xyz/media/jamtrack?id=${track}" alt="${track}">
         <h3>DIFFICULTIES</h3>
         <hr>
         <img src="difficulties/lead-${trackData.difficulties.lead}.png" alt="difficulty" class="diff">
