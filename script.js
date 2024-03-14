@@ -69,7 +69,7 @@ function openWindow(track) {
 
     document.getElementById("left-col").innerHTML = 
     `
-        <img src="https://api.f5api.xyz/media/jamtrack?id=${track}" alt="${track}">
+        <img src="${trackData.cover_image}" alt="${track}">
         <h3>DIFFICULTIES</h3>
         <hr>
         <img src="difficulties/lead-${trackData.difficulties.lead}.png" alt="difficulty" class="diff">
