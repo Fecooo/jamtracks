@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Jam Tracks</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+    <h1 id="sitetitle">Fortnite Jam Tracks</h1>
+
+    <!-- <div>
+        <div class="test">
+            <img src="https://f5api.sparkedservers.us/media/jamtrack?id=thesearch" alt="">
+            <div>
+                <h3>The Search</h3>
+                <h4>NF</h4>
+            </div>
+        </div>
+    </div> -->
+
+    <div id="filter">
+        <h2>Filter</h2>
+
+        <select id="filterDifficultyInstrument" onchange="updateTracksByDifficulty()">
+            <option value="vocal">Vocals</option>
+            <option value="bass">Bass</option>
+            <option value="drum">Drums</option>
+            <option value="lead">Lead</option>
+        </select>
+
+        <button class="setValue" id="setValueMinus" onclick="changeDifficultyValue(this); updateTracksByDifficulty()">-</button>
+        <input type="number" id="filterDifficultyValue" min="1" max="7" value="1" readonly>
+        <button class="setValue" id="setValuePlus" onclick="changeDifficultyValue(this); updateTracksByDifficulty()">+</button>
+
+        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionLower" onchange="updateTracksByDifficulty()"><span>≤</span>
+        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionEqual" onchange="updateTracksByDifficulty()"><span>=</span>
+        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionGreater" onchange="updateTracksByDifficulty()" checked><span>≥</span>
+
+        <br><br>
+
+        <select id="sortTracks" onchange="updateTracksBySort()">
+            <option value="sortBytrack_title">Title</option>
+            <option value="sortByduration.raw">Duration</option>
+            <option value="sortByartist_name">Artist</option>
+            <option value="sortByrelease_year">Release year</option>
+            <option value="sortBydifficulties.vocal">Vocals</option>
+            <option value="sortBydifficulties.bass">Bass</option>
+            <option value="sortBydifficulties.drum">Drums</option>
+            <option value="sortBydifficulties.lead">Lead</option>
+        </select>
+
+        <select id="orderTracks" onchange="updateTracksBySort()">
+            <option value="orderAsc">Ascending</option>
+            <option value="orderDesc">Descending</option>
+        </select>
+
+        <!-- <span><input type="checkbox" name="release" id="filR" onclick="checkFilters()" checked>Released</span>
+        <span><input type="checkbox" name="release" id="filU" onclick="checkFilters()" checked>Unreleased</span> -->
+    </div>
+    <hr style="width: 90%;">
+
+    <div id="cards">
+        <!-- <div class="card">
+            <img src="https://f5api.sparkedservers.us/media/jamtrack?id=thesearch" alt="">
+            <div>
+                <h3>The Search</h3>
+                <h4>NF</h4>
+            </div>
+        </div> -->
+    </div>
+
+    <div id="mainDiv" onclick="closeWindow()">
+        <div id="trackInfo">
+            <div id="close">
+                <img src="src/images/close.png" width="32px">
+            </div>
+
+            <div class="row">
+                <div class="column left-col" id="left-col">
+                    <!-- <img src="https://f5api.sparkedservers.us/media/jamtrack?id=thesearch" alt="thesearch">
+
+                    <h3>DIFFICULTIES</h3>
+
+                    <hr>
+
+                    <img src="test.png" alt="" class="diff">
+                    <img src="test.png" alt="" class="diff">
+                    <img src="test.png" alt="" class="diff">
+                    <img src="test.png" alt="" class="diff"> -->
+                </div>
+
+                <div class="column right-col" id="right-col">
+                    <!-- <h2>The Search (2019)</h2>
+                    <h3>NF</h3>
+
+                    <hr>
+
+                    <h3>LENGTH: <span>3:25</span></h3>
+                    <h3>BPM: <span>120</span></h3>
+
+                    <hr>
+
+                    <h3>INSTRUMENTS:</h3>
+                    <ul>
+                        <li>Vocals</li>
+                        <li>Bass</li>
+                        <li>Drum</li>
+                        <li>Keyboard</li>
+                    </ul>
+
+                    <hr>
+
+                    <h3>ROTATION:</h3>
+                    <ul>
+                        <li>2023.12.11.</li>
+                        <li>2023.12.13.</li>
+                        <li>2023.12.16.</li>
+                        <li>2023.12.19.</li>
+                        <li>2023.12.22.</li>
+                        <li>2023.12.23.</li>
+                        <li>2023.12.27.</li>
+                        <li>2023.12.31.</li>
+                        <li>2024.01.06.</li>
+                        <li>2024.01.11.</li>
+                        <li>2023.01.14.</li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/script.js"></script>
+</body>
+
+</html>
