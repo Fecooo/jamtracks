@@ -21,13 +21,15 @@ function loadTracks(data) {
     for (const track of Object.keys(data)) {
         cards.innerHTML += 
         `
-            <div class="card ${(data[track].released) ? `` : `unreleased`}" onclick="openWindow('${track}')">
-                <img src="${data[track].cover_image}" alt="${data[track].track_title} cover img">
-                <div>
-                    ${(data[track].released) ? `<h3>${data[track].track_title}</h3>` : `<h3>${data[track].track_title}</h3>`}
-                    <h4>${data[track].artist_name}</h4>
+            <a href="track/?id=${track}">
+                <div class="card ${(data[track].released) ? `` : "unreleased"}">
+                    <img src="${data[track].cover_image}" alt="${data[track].track_title} cover img">
+                    <div>
+                        ${(data[track].released) ? `<h3>${data[track].track_title}</h3>` : `<h3>${data[track].track_title}</h3>`}
+                        <h4>${data[track].artist_name}</h4>
+                    </div>
                 </div>
-            </div>
+            </a>
         `;
     }
 }
@@ -75,62 +77,6 @@ function updateTracksBySort() {
     clearTracks();
     loadTracks(filteredTracks);
     localStorage.setItem("displayed", JSON.stringify(filteredTracks));
-}
-
-
-// Window handle
-function openWindow(track) {
-    let trackData = apiData[track];
-
-    document.getElementById("left-col").innerHTML = 
-    `
-        <img src="${trackData.cover_image}" alt="${track}">
-        <h3>DIFFICULTIES</h3>
-        <hr>
-        <img src="src/images/difficulties/lead-${trackData.difficulties.lead}.png" alt="difficulty" class="diff">
-        <img src="src/images/difficulties/drum-${trackData.difficulties.drum}.png" alt="difficulty" class="diff">
-        <img src="src/images/difficulties/vocal-${trackData.difficulties.vocal}.png" alt="difficulty" class="diff">
-        <img src="src/images/difficulties/bass-${trackData.difficulties.bass}.png" alt="difficulty" class="diff">
-    `
-
-    let rotStr = "";
-    if (trackData.rotation) {
-        rotStr += "<h3>ROTATION:</h3><ul>";
-
-        trackData.rotation.forEach(rot => {
-            rotStr += `<li>${rot.replaceAll('-', '.')}.</li>\n`;
-        });
-
-        rotStr += "</ul>";
-    }
-
-    document.getElementById("right-col").innerHTML = 
-    `
-        <h2>${trackData.track_title} (${trackData.release_year})</h2>
-        <h3>${trackData.artist_name}</h3>
-        <hr>
-
-        <h3>LENGTH: <span>${trackData.duration.formatted}</span></h3>
-        <h3>BPM: <span>${trackData.bpm}</span></h3>
-        <hr>
-        
-        <h3>INSTRUMENTS:</h3>
-        <ul>
-            <li>${trackData.instruments[0]}</li>
-            <li>${trackData.instruments[1]}</li>
-            <li>${trackData.instruments[2]}</li>
-            <li>${trackData.instruments[3]}</li>
-        </ul>
-        <hr>
-
-        ${rotStr}
-    `
-
-    document.getElementById("mainDiv").style.display = "block";
-}
-
-function closeWindow() {
-    document.getElementById("mainDiv").style.display = "none";
 }
 
 
