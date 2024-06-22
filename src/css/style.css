@@ -41,6 +41,9 @@ body {
     right: 0;
     text-align: center;
 }
+#cards > a {
+    text-decoration: none;
+}
 .unreleased h3 {
     color: rgb(255, 186, 57);
 }
