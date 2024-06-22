@@ -5,7 +5,7 @@ function loadPage() {
         const SONGID = params.get("id");
         const TRACKDATA = JSON.parse(localStorage.getItem("data"))[SONGID];
 
-        console.log(TRACKDATA);
+        document.title = TRACKDATA.track_title;
         document.getElementById("content").innerHTML = 
         `
             <h1>${TRACKDATA.track_title} (${TRACKDATA.release_year})</h1>

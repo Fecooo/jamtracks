@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fortnite Jam Tracks</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="shortcut icon" href="https://drive.google.com/thumbnail?id=1jB764ZqfA1iOXCCoDgPGXHnN8_F9JvWm" type="image/x-icon">
 </head>
 
 <body>
@@ -15,24 +16,31 @@
     <div id="filter">
         <h2>Filter</h2>
 
-        <select id="filterDifficultyInstrument" onchange="updateTracksByDifficulty()">
-            <option value="vocal">Vocals</option>
-            <option value="bass">Bass</option>
-            <option value="drum">Drums</option>
-            <option value="lead">Lead</option>
-        </select>
-
-        <button class="setValue" id="setValueMinus" onclick="changeDifficultyValue(this); updateTracksByDifficulty()">-</button>
-        <input type="number" id="filterDifficultyValue" min="1" max="7" value="1" readonly>
-        <button class="setValue" id="setValuePlus" onclick="changeDifficultyValue(this); updateTracksByDifficulty()">+</button>
-
-        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionLower" onchange="updateTracksByDifficulty()"><span>≤</span>
-        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionEqual" onchange="updateTracksByDifficulty()"><span>=</span>
-        <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionGreater" onchange="updateTracksByDifficulty()" checked><span>≥</span>
+        <input type="checkbox" id="allTracks" onclick="updateLocalStorage(); showAllTracksChanged()">
+        <span>All</span>
 
         <br><br>
 
-        <select id="sortTracks" onchange="updateTracksBySort()">
+        <div id="instrumentSection">
+            <select id="filterDifficultyInstrument" onchange="updateLocalStorage()">
+                <option value="vocal">Vocals</option>
+                <option value="bass">Bass</option>
+                <option value="drum">Drums</option>
+                <option value="lead">Lead</option>
+            </select>
+    
+            <button class="setValue" id="setValueMinus" onclick="changeDifficultyValue(this); updateLocalStorage()">-</button>
+            <input type="number" id="filterDifficultyValue" min="1" max="7" value="1" readonly>
+            <button class="setValue" id="setValuePlus" onclick="changeDifficultyValue(this); updateLocalStorage()">+</button>
+    
+            <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionLower" onchange="updateLocalStorage()"><span>≤</span>
+            <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionEqual" onchange="updateLocalStorage()"><span>=</span>
+            <input type="radio" name="filterDifficultyOption" id="filterDifficultyOptionGreater" onchange="updateLocalStorage()" checked><span>≥</span>
+    
+            <br><br>
+        </div>
+
+        <select id="sortTracks" onchange="updateLocalStorage()">
             <option value="sortBytrack_title">Title</option>
             <option value="sortByduration.raw">Duration</option>
             <option value="sortByartist_name">Artist</option>
@@ -43,10 +51,14 @@
             <option value="sortBydifficulties.lead">Lead</option>
         </select>
 
-        <select id="orderTracks" onchange="updateTracksBySort()">
+        <select id="orderTracks" onchange="updateLocalStorage()">
             <option value="orderAsc">Ascending</option>
             <option value="orderDesc">Descending</option>
         </select>
+
+        <br><br>
+
+        <input type="text" id="searchBar" oninput="searchBarChanged()" placeholder="Search">
     </div>
 
     <hr style="width: 90%;">
