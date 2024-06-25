@@ -19,6 +19,9 @@
         <input type="checkbox" id="allTracks" onclick="updateLocalStorage(); showAllTracksChanged()">
         <span>All</span>
 
+        <input type="checkbox" id="rotationTracks" onclick="updateLocalStorage()">
+        <span>Rotation</span>
+
         <br><br>
 
         <div id="instrumentSection">
@@ -45,6 +48,8 @@
             <option value="sortByduration.raw">Duration</option>
             <option value="sortByartist_name">Artist</option>
             <option value="sortByrelease_year">Release year</option>
+            <option value="sortByavg_difficulty">AVG Difficulty</option>
+            <option value="sortByrotation.length">In rotation</option>
             <option value="sortBydifficulties.vocal">Vocals</option>
             <option value="sortBydifficulties.bass">Bass</option>
             <option value="sortBydifficulties.drum">Drums</option>
@@ -59,6 +64,10 @@
         <br><br>
 
         <input type="text" id="searchBar" oninput="searchBarChanged()" placeholder="Search">
+
+        <br>
+
+        <h3>Showing <span id="countOfTracks">0</span> Jam Tracks</h3>
     </div>
 
     <hr style="width: 90%;">

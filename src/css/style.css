@@ -41,11 +41,8 @@ body {
     right: 0;
     text-align: center;
 }
-#cards > a {
+#cards a {
     text-decoration: none;
-}
-.unreleased h3 {
-    color: rgb(255, 186, 57);
 }
 .card {
     text-align: center;
@@ -54,9 +51,19 @@ body {
 .card img {
     width: 200px;
 }
+.card h3 {
+    color: rgb(209, 209, 209);
+}
+.inrotation h3, #countOfTracks {
+    color: rgb(255, 186, 57);
+}
 .card h4 {
     margin-top: -20px;
     color: rgb(160, 160, 160);
+}
+.card p {
+    margin-top: -20px;
+    color: rgb(141, 141, 141);
 }
 
 @media only screen and (max-width: 800px) {

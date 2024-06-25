@@ -13,23 +13,44 @@ function getAPIData() {
     })
 }
 
+function getDailyRotation() {
+    let date = new Date().toISOString().split("T")[0];
+    
+    fetch(`https://api.f5api.xyz/jamtracks/rotation?date=${date}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.result) {
+            localStorage.setItem("rotation", JSON.stringify(data.data));
+        } else {
+            localStorage.setItem("rotation", JSON.stringify([]));
+        }
+    });
+}
+
 checkLocalStorage();
 loadFromLocalStorage();
+
 showAllTracksChanged();
+
+getDailyRotation();
 getAPIData();
 
 // Track cards handle
 function loadTracks(data) {
     let cards = document.getElementById("cards");
+    let rotation = JSON.parse(localStorage.getItem("rotation"));
+    document.getElementById("countOfTracks").innerHTML = `${Object.keys(data).length}`;
+    
     for (const track of Object.keys(data)) {
         cards.innerHTML += 
         `
             <a href="track/?id=${track}">
-                <div class="card ${(data[track].released) ? `` : "unreleased"}">
+                <div class="card ${(rotation.includes(track)) ? `inrotation` : ``}">
                     <img src="${data[track].cover_image}" alt="${data[track].track_title} cover img">
                     <div>
                         ${(data[track].released) ? `<h3>${data[track].track_title}</h3>` : `<h3>${data[track].track_title}</h3>`}
                         <h4>${data[track].artist_name}</h4>
+                        ${localStorage.getItem("orderTracksBy") == "sortByrotation.length" ? data[track].rotation != null ? `<p>${data[track].rotation.length}x</p>` : `<p>0x</p>` : ``}
                     </div>
                 </div>
             </a>
@@ -64,6 +85,9 @@ function checkLocalStorage() {
     if (localStorage.getItem("showAllTracks") == null) {
         localStorage.setItem("showAllTracks", false)
     }
+    if (localStorage.getItem("showRotationTracks") == null) {
+        localStorage.setItem("showRotationTracks", false)
+    }
 }
 
 function updateLocalStorage() {
@@ -73,6 +97,7 @@ function updateLocalStorage() {
     localStorage.setItem("orderTracksBy", document.getElementById("sortTracks").value);
     localStorage.setItem("orderTracksOrder", document.getElementById("orderTracks").value);
     localStorage.setItem("showAllTracks", document.getElementById("allTracks").checked);
+    localStorage.setItem("showRotationTracks", document.getElementById("rotationTracks").checked);
 
     loadFromLocalStorage();
     showAllTracksChanged();
@@ -86,11 +111,13 @@ function loadFromLocalStorage() {
     document.getElementById("sortTracks").value = localStorage.getItem("orderTracksBy") == null ? "sortBytrack_title" : localStorage.getItem("orderTracksBy");
     document.getElementById("orderTracks").value = localStorage.getItem("orderTracksOrder") == null ? "orderAsc" : localStorage.getItem("orderTracksOrder");
     localStorage.getItem("showAllTracks") == null ? document.getElementById("allTracks").checked = false : document.getElementById("allTracks").checked = JSON.parse(localStorage.getItem("showAllTracks"));
+    localStorage.getItem("showRotationTracks") == null ? document.getElementById("rotationTracks").checked = false : document.getElementById("rotationTracks").checked = JSON.parse(localStorage.getItem("showRotationTracks"));
 }
 
 // Updating tracks
 function updateTracks() {
     let tracks = JSON.parse(localStorage.getItem("data"));
+    let rotation = JSON.parse(localStorage.getItem("rotation"));
 
     let instrument = localStorage.getItem("filterInstrument");
     let difficulty = parseInt(localStorage.getItem("filterInstrumentValue"));
@@ -98,6 +125,7 @@ function updateTracks() {
     let sort = localStorage.getItem("orderTracksBy");
     let order = localStorage.getItem("orderTracksOrder");
     let showall = JSON.parse(localStorage.getItem("showAllTracks"));
+    let showrotation = JSON.parse(localStorage.getItem("showRotationTracks"));
     let searchtext = document.getElementById("searchBar").value;
     let filteredTracks;
 
@@ -115,9 +143,17 @@ function updateTracks() {
         }));
     }
 
+    if (showrotation) {
+        filteredTracks = Object.fromEntries(Object.entries(filteredTracks).filter(([key, value]) => {
+            if (rotation.includes(key)) {
+                return true;
+            }
+        }));
+    }
+
     filteredTracks = sortTracks(filteredTracks, [sort.split("sortBy").pop()], order == "orderAsc" ? false : true);
     
-    console.log(filteredTracks);
+    //console.log(filteredTracks);
     clearTracks();
     loadTracks(filteredTracks);
     localStorage.setItem("displayed", JSON.stringify(filteredTracks));

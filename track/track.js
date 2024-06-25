@@ -6,6 +6,8 @@ function loadPage() {
         const TRACKDATA = JSON.parse(localStorage.getItem("data"))[SONGID];
 
         document.title = TRACKDATA.track_title;
+        let rotStr = TRACKDATA.rotation ? `<ul>${TRACKDATA.rotation.map(rot => `<li>${rot.replaceAll('-', '.')}.</li>`).join('')}</ul>` : "";
+
         document.getElementById("content").innerHTML = 
         `
             <h1>${TRACKDATA.track_title} (${TRACKDATA.release_year})</h1>
@@ -21,7 +23,6 @@ function loadPage() {
                         <li>Album: <span id="trackAlbum">${TRACKDATA.album_name ? TRACKDATA.album_name : "-"}</span></li>
                         <li>Length: <span id="trackLength">${TRACKDATA.duration.formatted}</span></li>
                         <li>BPM: <span id="trackBPM">${TRACKDATA.bpm}</span></li>
-                        <!-- <li>Instruments: <span id="trackInstruments">ABC, DEF, GHI, JKL</span></li> -->
                         <li>
                             Instruments:
                             <ul id="trackInstrumentsUl">
@@ -36,17 +37,18 @@ function loadPage() {
 
                 <div id="trackDifficulties">
                     <h1>Difficulties</h1>
+                    <h3>AVG: ${TRACKDATA.avg_difficulty}</h3>
 
-                    <img src="../src/images/difficulties/bass-${TRACKDATA.difficulties.lead}.png" alt="" class="diff">
+                    <img src="../src/images/difficulties/bass-${TRACKDATA.difficulties.bass}.png" alt="" class="diff">
                     <img src="../src/images/difficulties/drum-${TRACKDATA.difficulties.drum}.png" alt="" class="diff">
                     <img src="../src/images/difficulties/vocal-${TRACKDATA.difficulties.vocal}.png" alt="" class="diff">
-                    <img src="../src/images/difficulties/lead-${TRACKDATA.difficulties.bass}.png" alt="" class="diff">
+                    <img src="../src/images/difficulties/lead-${TRACKDATA.difficulties.lead}.png" alt="" class="diff">
                 </div>
 
                 <div id="trackRotation">
-                    <h1>Rotation</h1>
+                    <h1>Rotation (${TRACKDATA.rotation.length}x)</h1>
 
-                    <p>-</p>
+                    ${rotStr}
                 </div>
             </div>
         `

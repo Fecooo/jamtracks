@@ -72,6 +72,12 @@ body {
     flex-direction: column;
     align-items: center;
 }
+#trackDifficulties h1, h3 {
+    text-align: center;
+}
+#trackDifficulties h3 {
+    margin-top: -25px;
+}
 #trackDifficulties img {
     width: 164px;
     margin: 10px;
@@ -81,6 +87,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#trackRotation ul {
+    list-style-image: url("../src/images/music-note.png");
+    width: 150px;
+    max-height: 250px;
+    overflow: auto;
 }
 
 
