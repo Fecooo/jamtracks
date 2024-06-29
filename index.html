@@ -50,6 +50,7 @@
             <option value="sortByrelease_year">Release year</option>
             <option value="sortByavg_difficulty">AVG Difficulty</option>
             <option value="sortByrotation.length">In rotation</option>
+            <option value="sortBylongest_wait">Longest wait</option>
             <option value="sortBydifficulties.vocal">Vocals</option>
             <option value="sortBydifficulties.bass">Bass</option>
             <option value="sortBydifficulties.drum">Drums</option>
@@ -72,8 +73,11 @@
 
     <hr style="width: 90%;">
 
-    <div id="cards"></div>
-
+    <div id="content">
+        <div id="cards"></div>
+        <button type="button" id="loadMoreBtn" onclick="loadMore()">Load more</button>
+    </div>
+    
     <script src="src/js/script.js"></script>
 </body>
 

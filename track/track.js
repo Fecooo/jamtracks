@@ -6,7 +6,7 @@ function loadPage() {
         const TRACKDATA = JSON.parse(localStorage.getItem("data"))[SONGID];
 
         document.title = TRACKDATA.track_title;
-        let rotStr = TRACKDATA.rotation ? `<ul>${TRACKDATA.rotation.map(rot => `<li>${rot.replaceAll('-', '.')}.</li>`).join('')}</ul>` : "";
+        let rotStr = TRACKDATA.rotation ? `<ul>${TRACKDATA.rotation.reverse().map(rot => `<li>${rot.replaceAll('-', '.')}.</li>`).join('')}</ul>` : "";
 
         document.getElementById("content").innerHTML = 
         `
@@ -39,10 +39,14 @@ function loadPage() {
                     <h1>Difficulties</h1>
                     <h3>AVG: ${TRACKDATA.avg_difficulty}</h3>
 
-                    <img src="../src/images/difficulties/bass-${TRACKDATA.difficulties.bass}.png" alt="" class="diff">
-                    <img src="../src/images/difficulties/drum-${TRACKDATA.difficulties.drum}.png" alt="" class="diff">
-                    <img src="../src/images/difficulties/vocal-${TRACKDATA.difficulties.vocal}.png" alt="" class="diff">
-                    <img src="../src/images/difficulties/lead-${TRACKDATA.difficulties.lead}.png" alt="" class="diff">
+                    <div id="trackDifficultiesContainer">
+                        <img src="../src/images/difficulties/bass-${TRACKDATA.difficulties.bass}.png" alt="" class="diff">
+                        <img src="../src/images/difficulties/drum-${TRACKDATA.difficulties.drum}.png" alt="" class="diff">
+                        <img src="../src/images/difficulties/vocal-${TRACKDATA.difficulties.vocal}.png" alt="" class="diff">
+                        <img src="../src/images/difficulties/lead-${TRACKDATA.difficulties.lead}.png" alt="" class="diff">
+                        <img src="../src/images/difficulties/pbass-${TRACKDATA.difficulties.probass}.png" alt="" class="diff">
+                        <img src="../src/images/difficulties/plead-${TRACKDATA.difficulties.prolead}.png" alt="" class="diff">
+                    </div>
                 </div>
 
                 <div id="trackRotation">

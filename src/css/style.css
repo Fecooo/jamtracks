@@ -35,10 +35,7 @@ body {
     grid-template-columns: 1fr;
     grid-auto-rows: 1fr;
     gap: 20px;
-    position: absolute;
-    z-index: -5;
-    left: 0;
-    right: 0;
+    position: relative;
     text-align: center;
 }
 #cards a {
@@ -54,9 +51,6 @@ body {
 .card h3 {
     color: rgb(209, 209, 209);
 }
-.inrotation h3, #countOfTracks {
-    color: rgb(255, 186, 57);
-}
 .card h4 {
     margin-top: -20px;
     color: rgb(160, 160, 160);
@@ -65,6 +59,22 @@ body {
     margin-top: -20px;
     color: rgb(141, 141, 141);
 }
+.inrotation h3, #countOfTracks {
+    color: rgb(255, 186, 57);
+}
+
+#loadMoreBtn {
+    padding: .7rem 2rem;
+    background: royalblue;
+    border: none;
+    color: #FFF;
+    margin: 20px auto;
+    display: block;
+    font-size: 1.1rem;
+    cursor: pointer;
+    outline: none;
+}
+
 
 @media only screen and (max-width: 800px) {
     .card {
@@ -131,73 +141,27 @@ body {
     margin-top: -220.78px;
 }
 
-#trackInfo {
-    margin: 25px auto;
-    width: 75%;
-    height: 90vh;
-    border: 3px solid rgb(164, 229, 255);
-    background: linear-gradient(rgb(0, 58, 105), rgb(99, 0, 99));
-    border-radius: 10px;
-}
-#close {
-    float: right;
-    cursor: pointer;
-}
 
-#trackInfo > .row > .left-col > img {
-    margin: 10px;
-}
-.left-col > h3 {
-    text-align: center;
-}
-.right-col > ul {
-    list-style-image: url("../images/music-note.png");
-    width: 150px;
-    max-height: 250px;
-    overflow: auto;
-}
-.diff {
-    display: block;
-    margin: 20px auto !important;
-    width: 164px !important;
-    height: 48px;
-}
 
-@media only screen and (min-width: 600px) {
-    #trackInfo > .row > .left-col > img {
-        width: calc(100% - 20px);
-    }
-    #trackInfo > .row > .left-col > hr {
-        width: calc(100% - 20px);
-    }
-}
-@media screen and (max-width: 600px) {
-    .column {
-        width: 100%;
-    }
-}
-/* @media only screen and (max-width: 499px) {
-    #trackInfo > .row > .left-col > img {
-        width: 100px;
-    }
-} */
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-.row {
-    display: flex;
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #6840B7;
 }
   
-.column {
-    padding: 10px;
-    height: 87.7vh;
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
 }
-.column:nth-child(1) {
-    width: 25%;
+   
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #1D246A; 
+    border-radius: 10px;
 }
-.column:nth-child(2) {
-    width: 75%;
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #091274; 
 }
