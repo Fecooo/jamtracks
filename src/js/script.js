@@ -6,7 +6,7 @@ let currentIndex = 0;
 let itemsPerStep = 50;
 
 function getAPIData() {
-    fetch("https://api.f5api.xyz/jamtracks")
+    fetch("https://f5api.mysrv.us/jamtracks")
     .then(res => res.json())
     .then(data => {
         apiData = data.tracks;
@@ -19,7 +19,7 @@ function getAPIData() {
 function getDailyRotation() {
     let date = new Date().toISOString().split("T")[0];
     
-    fetch(`https://api.f5api.xyz/jamtracks/rotation?date=${date}`)
+    fetch(`https://f5api.mysrv.us/jamtracks/rotation?date=${date}`)
     .then(res => res.json())
     .then(data => {
         if (data.result) {
